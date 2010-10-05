@@ -85,4 +85,4 @@ INSTALLED_APPS = (
 
 
 SCRIPTS = here('scripts/')
-CALIBRE_USER = "bms"
+CALIBRE_USER = "cloud"
