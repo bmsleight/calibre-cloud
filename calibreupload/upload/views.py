@@ -40,11 +40,8 @@ def handle_uploaded_book(f, convert):
         ext = ".mobi"
     else:
         ext = ""
-    # Little security hole. Try to pass settings.SCRIPTS as your own path. Then setting.CALIBRE_USER will run a script.
-    # Hence careful with setting.*
-    # However once you have control of settings.SCRIPTS you can do much worse things - IMHO.
-    # However caution adviced.
-    calibre_process = Popen(["sudo",  settings.SCRIPTS + "/run-calibre-convert-upload.sh", settings.CALIBRE_USER, settings.SCRIPTS, safe_file, ext], stdout=PIPE)
+    # However caution advice as a script is run as the user of this process.
+    calibre_process = Popen([settings.SCRIPTS + "/calibre-convert-upload.sh", safe_file, ext], stdout=PIPE)
     calibre_process.wait()
     os.remove(safe_file)
 
