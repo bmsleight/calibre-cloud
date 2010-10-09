@@ -40,8 +40,6 @@ def install_calibre():
     child.expect(pexpect.EOF, timeout=600)
     child.close()
 
-def clean_desktop():
-    pexpect_simple('rm /usr/share/applications/python2.6.desktop /usr/share/applications/defaults.list /usr/share/applications/mb-* /usr/share/applications/x11vnc.desktop')
 
 def install_django_app(password):
     pexpect_simple('rm -R /home/cloud/*')
@@ -157,7 +155,6 @@ def main():
         # set up stuff
         add_user_cloud(password_user)
         install_calibre()
-        clean_desktop()
         install_django_app(password_clear)
         setup_x11vnc(password_user)
         setup_rc()
