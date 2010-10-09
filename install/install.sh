@@ -2,6 +2,11 @@
 
 #installation
 
+echo "Password for the user cloud ? "
+read PASSWORD_USER
+echo "Password for the user cloud, when uploading (send in cleartext over http) ? "
+read PASSWORD_CLEAR
+
 apt-get --assume-yes purge sendmail*
 apt-get --assume-yespurge apache2*
 
@@ -14,7 +19,7 @@ mkdir -p /usr/share/icons/hicolor/
 
 cd /tmp/
 wget http://calibre-cloud.googlecode.com/svn/trunk/install/setup.py
-python /tmp/setup.py
+python /tmp/setup.py --password="$PASSWORD_USER" --clear="$PASSWORD_CLEAR"
 
 echo "If the above reads: **** SETUP Ran with no errors **** "
 echo "The everything was fine."

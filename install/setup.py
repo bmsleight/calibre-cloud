@@ -136,16 +136,33 @@ def setup_rc():
     pexpect_simple('echo "/root/startvnc.sh &" >> /etc/rc.local')
 
 def main():
-    password_user  = str(raw_input("Password for the user cloud ? "))
-    password_clear = str(raw_input("Password for the user cloud, when uploading (send in cleartext over http) ? "))
-    # set up stuff
-    add_user_cloud(password_user)
-    install_calibre()
-    clean_desktop()
-    install_django_app(password_clear)
-    setup_x11vnc(password_user)
-    setup_rc()
-    print "**** SETUP Ran with no errors ****"
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "p:c:", ["password=", "clear="])
+    except getopt.GetoptError, err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        print "Invalid option"
+        sys.exit(2)
+    output = None
+    verbose = False
+    password_user = False
+    for o, a in opts:
+        if o in ("-p", "--password"):
+            password_user = a
+        elif o in ("-c", "--clear"):
+            password_clear = a
+        else:
+            assert False, "unhandled option"
+    if password_user:
+        # set up stuff
+        add_user_cloud(password_user)
+        install_calibre()
+        clean_desktop()
+        install_django_app(password_clear)
+        setup_x11vnc(password_user)
+        setup_rc()
+        print "**** SETUP Ran with no errors ****"
 
 if __name__ == "__main__":
     main()
