@@ -1,0 +1,13 @@
+<Proxy *>
+        Order deny,allow
+        Allow from all
+</Proxy>
+ProxyPass /calibre/ http://127.0.0.1:8080/
+ProxyHTMLURLMap http://127.0.0.1:8080 /calibre
+<Location /calibre/> 
+    ProxyPassReverse / 
+    SetOutputFilter proxy-html 
+    ProxyHTMLURLMap / /calibre/ 
+    ProxyHTMLURLMap /calibre    /calibre
+    RequestHeader unset Accept-Encoding
+</Location>

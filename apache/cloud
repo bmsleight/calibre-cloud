@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *>
 
     ServerAdmin calibreupload@example.com
     ServerName calibreupload
@@ -6,7 +6,7 @@
 
     # Django settings
     WSGIScriptAlias / /home/cloud/calibreupload/wsgi_handler.py
-    WSGIDaemonProcess calibreupload user=cloud group=cloud processes=1 threads=5
+    WSGIDaemonProcess calibreupload user=cloud group=cloud processes=1 threads=3
     WSGIProcessGroup calibreupload
 
 
