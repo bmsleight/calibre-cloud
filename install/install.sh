@@ -12,3 +12,12 @@ apt-get --assume-yes install xvfb x11vnc matchbox matchbox-themes-extra python-d
 mkdir /usr/share/desktop-directories/
 mkdir -p /usr/share/icons/hicolor/
 
+cd /tmp/
+wget http://calibre-cloud.googlecode.com/svn/trunk/install/setup.py
+python /tmp/setup.py
+
+echo "If the above reads: **** SETUP Ran with no errors **** "
+echo "The everything was fine."
+echo "To start the services running, enter the following command :-"
+echo "nohup /root/startvnc.sh &"
+

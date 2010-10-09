@@ -1,6 +1,5 @@
 import getopt, sys
 import pexpect
-from subprocess import *
 
 
 def pexpect_simple(cmd):
@@ -64,8 +63,8 @@ def install_django_app(password):
     child.sendline(password)
     child.expect(pexpect.EOF, timeout=600)
     child.close()
-    pexpect_simple('cp /home/cloud2/calibre-cloud-read-only/apache/cloud /etc/apache2/sites-available/default')
-    pexpect_simple('cp /home/cloud2/calibre-cloud-read-only/apache/calibre /etc/apache2/sites-available/calibre')
+    pexpect_simple('cp /home/cloud/calibre-cloud-read-only/apache/cloud /etc/apache2/sites-available/default')
+    pexpect_simple('cp /home/cloud/calibre-cloud-read-only/apache/calibre /etc/apache2/sites-available/calibre')
     pexpect_simple('a2ensite calibre')
     pexpect_simple('a2enmod proxy proxy_html proxy_http headers')
     pexpect_simple('/etc/init.d/apache2 restart')
@@ -132,30 +131,21 @@ def setup_x11vnc(password):
     child.close()
 
 
+def setup_rc():
+    pexpect_simple('cp /home/cloud/calibre-cloud-read-only/install/startvnc.sh /root/startvnc.sh')
+    pexpect_simple('echo "/root/startvnc.sh &" >> /etc/rc.local')
 
 def main():
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "p:", ["password="])
-    except getopt.GetoptError, err:
-        # print help information and exit:
-        print str(err) # will print something like "option -a not recognized"
-        print "Invalid option"
-        sys.exit(2)
-    output = None
-    verbose = False
-    password = False
-    for o, a in opts:
-        if o in ("-p", "--password"):
-            password = a
-        else:
-            assert False, "unhandled option"
-    if password:
-        # set up stuff
-        add_user_cloud(password)
-        install_calibre()
-        clean_desktop()
-        install_django_app(password)
-        setup_x11vnc(password)
+    password_user  = str(raw_input("Password for the user cloud ? "))
+    password_clear = str(raw_input("Password for the user cloud, when uploading (send in cleartext over http) ? "))
+    # set up stuff
+    add_user_cloud(password_user)
+    install_calibre()
+    clean_desktop()
+    install_django_app(password_clear)
+    setup_x11vnc(password_user)
+    setup_rc()
+    print "**** SETUP Ran with no errors ****"
 
 if __name__ == "__main__":
     main()
