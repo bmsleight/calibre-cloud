@@ -136,7 +136,6 @@ def setup_rc():
     pexpect_simple('echo "/root/startvnc.sh &" >> /etc/rc.local')
 
 def main():
-def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "p:c:", ["password=", "clear="])
     except getopt.GetoptError, err:
