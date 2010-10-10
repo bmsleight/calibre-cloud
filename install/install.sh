@@ -42,8 +42,14 @@ rm /tmp/setup*
 wget http://calibre-cloud.googlecode.com/svn/trunk/install/setup.py
 python /tmp/setup.py --password="$PASSWORD_USER" --clear="$PASSWORD_CLEAR"
 
+echo password="$PASSWORD_USER" clear="$PASSWORD_CLEAR" >/root/cloud.txt
+
 echo "If the above reads: **** SETUP Ran with no errors **** "
-echo "The everything was fine."
+echo "Then everything was fine."
+cp /home/cloud/calibre-cloud-read-only/install/startvnc.sh /root/startvnc.sh
+echo "/bin/bash /root/startvnc.sh &" > /etc/rc.local
+
 echo "To start the services running, enter the following command :-"
 echo "nohup /bin/bash /root/startvnc.sh &"
+echo "... or reboot via the VPS control panel."
 

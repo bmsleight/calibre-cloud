@@ -129,10 +129,6 @@ def setup_x11vnc(password):
     child.close()
 
 
-def setup_rc():
-    pexpect_simple('cp /home/cloud/calibre-cloud-read-only/install/startvnc.sh /root/startvnc.sh')
-    pexpect_simple('echo "/bin/bash /root/startvnc.sh &" > /etc/rc.local')
-
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "p:c:", ["password=", "clear="])
@@ -157,7 +153,6 @@ def main():
         install_calibre()
         install_django_app(password_clear)
         setup_x11vnc(password_user)
-        setup_rc()
         print "**** SETUP Ran with no errors ****"
 
 if __name__ == "__main__":

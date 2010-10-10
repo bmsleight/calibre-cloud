@@ -6,7 +6,7 @@
 
     # Django settings
     WSGIScriptAlias / /home/cloud/calibreupload/wsgi_handler.py
-    WSGIDaemonProcess calibreupload user=cloud group=cloud processes=1 threads=3
+    WSGIDaemonProcess calibreupload user=cloud group=cloud processes=1 threads=1
     WSGIProcessGroup calibreupload
 
 
