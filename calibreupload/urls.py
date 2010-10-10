@@ -22,4 +22,7 @@ urlpatterns = patterns('',
     ('^upload/completed/$', completed),
     ('^upload/$', import_book),
 
+    # Flat pages are too much hassle for just two pages.
+    ('^/$', welcome),
+
 )

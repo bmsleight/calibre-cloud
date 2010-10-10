@@ -50,3 +50,6 @@ def handle_uploaded_book(f, convert):
 def completed(request):
     return render_to_response('upload/completed.html')
 
+def welcome(request):
+    return render_to_response('upload/welcome.html')
+

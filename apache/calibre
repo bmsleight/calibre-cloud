@@ -11,3 +11,10 @@ ProxyHTMLURLMap http://127.0.0.1:8080 /calibre
     ProxyHTMLURLMap /calibre    /calibre
     RequestHeader unset Accept-Encoding
 </Location>
+
+<Location /vnc/>
+        RewriteEngine   on
+        RewriteCond     %{SERVER_PORT} ^80$
+        RewriteRule     ^(.*)$ https://%{SERVER_NAME} [L,R]
+</Location>
+

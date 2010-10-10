@@ -52,7 +52,7 @@ def install_django_app(password):
     child.sendline('yes')
     #Username (Leave blank to use 'bms'): 
     child.expect('\): ')
-    child.sendline('y')
+    child.sendline('cloud')
     child.expect('E-mail address: ')
     child.sendline('cloud@example.com')
     child.expect('Password: ')
