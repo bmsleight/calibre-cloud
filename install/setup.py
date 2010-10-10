@@ -131,7 +131,7 @@ def setup_x11vnc(password):
 
 def setup_rc():
     pexpect_simple('cp /home/cloud/calibre-cloud-read-only/install/startvnc.sh /root/startvnc.sh')
-    pexpect_simple('echo "/root/startvnc.sh &" >> /etc/rc.local')
+    pexpect_simple('echo "/bin/bash /root/startvnc.sh &" > /etc/rc.local')
 
 def main():
     try:
