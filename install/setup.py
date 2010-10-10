@@ -61,6 +61,7 @@ def install_django_app(password):
     child.sendline(password)
     child.expect(pexpect.EOF, timeout=600)
     child.close()
+    pexpect_simple('a2enmod rewrite')
     pexpect_simple('cp /home/cloud/calibre-cloud-read-only/apache/cloud /etc/apache2/sites-available/default')
     pexpect_simple('cp /home/cloud/calibre-cloud-read-only/apache/calibre /etc/apache2/sites-available/calibre')
     pexpect_simple('a2ensite calibre')
